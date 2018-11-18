@@ -1,68 +1,47 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
-import java.util.Iterator;
-
+import java.util.Collection;
 import org.junit.jupiter.api.Test;
 
-import main.java.uk.ac.uos.i2p.PolyTask.BoolToString;
-import main.java.uk.ac.uos.i2p.PolyTask.NumberCast;
-import main.java.uk.ac.uos.i2p.PolyTask.Task2;
-import main.java.uk.ac.uos.i2p.PolyTask.Task3;
-import main.java.uk.ac.uos.i2p.PolyTask.TextString;
-import main.java.uk.ac.uos.i2p.PolyTask.NullToString;
+import main.java.uk.ac.uos.i2p.JsonParser.JsonArrayToCollection;
+import main.java.uk.ac.uos.i2p.JsonParser.ObjectParser;
+
 
 
 class PolyTests {
 
 	@Test
-	void TextInQs() {
-		TextString nathan = new TextString();
-		String output = nathan.describe();
-		assertEquals("\"example\"", output);
+	void jsonArrayToCollectionTest() {
+		JsonArrayToCollection nathan = new JsonArrayToCollection("[\"/task/452359-4435382-6595137\", \"/task/99012-65325148-3574826\"]");
+		Collection<String> output = nathan.jsonArrayToCollection();
+		
+		String FinalCopy = "";
+		
+		for (Object o : output) {
+			FinalCopy = FinalCopy + o;
+			System.out.println(FinalCopy);
+			}
+		
+		assertEquals("/task/452359-4435382-6595137 /task/99012-65325148-3574826", FinalCopy);
 	}
 	
 	@Test
-	void DoubleToString() {
-		NumberCast nathan = new NumberCast();
-		String output = nathan.describe();
-		assertEquals("1.1", output);
+	void ObjectParserArray() throws Exception {
+		ObjectParser nathan = new ObjectParser("\"tasks\": [\"/task/452359-4435382-6595137\", \"/task/99012-65325148-3574826\"]");
+		Collection<String> output = nathan.jsonObject();
+		
+		String FinalCopy = "";
+		
+		for (Object o : output) {
+			FinalCopy = FinalCopy + o;
+			System.out.println(FinalCopy);
+			}
+		
+		assertEquals("/task/452359-4435382-6595137 /task/99012-65325148-3574826", FinalCopy);
 	}
 	
-	@Test
-	void BooleanToString() {
-		BoolToString nathan = new BoolToString();
-		String output = nathan.describe();
-		assertEquals("true", output);
-	}
-	
-	@Test
-	void NullToString() {
-		NullToString nathan = new NullToString();
-		String output = nathan.describe();
-		assertEquals("null", output);
-	}
-	
-	@Test
-	void Task2Test() {
-		Task2 nathan = new Task2();
-		String output = nathan.describe();
-		assertEquals("[\"example\",1.1,true,null]", output);
-	}
-	@Test
-	void Caketest() {
-		Task3 nathan = new Task3();
-		String output = nathan.multidescribe();
-		assertEquals("cake", output);
-	}
-	@Test
-	void Task3Test() {
-		Task3 nathan = new Task3();
-		//String output = nathan.process();
-		assertEquals("cake", "cake");
-	}
 
 
 	
