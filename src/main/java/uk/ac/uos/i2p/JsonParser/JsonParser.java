@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public interface JsonParser {
 
-	Collection<String> jsonObject() throws Exception, Exception;
+	Collection<String> jsonItem() throws Exception, Exception;
 
 	Collection<String> jsonArrayToCollection();
 	
