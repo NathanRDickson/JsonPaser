@@ -1,21 +1,18 @@
 package main.java.uk.ac.uos.i2p.JsonParser;
 
-public class TextString{
+public class TextString implements Describer{
+	private String text;
 	
-	public String jsonStringItem(String text) {
-		String stringOutput = text.substring(1, text.length()-1);
-		return stringOutput;
+	public TextString (String inputText) {
+		text = inputText;
+	}
+	
+	@Override public String describe() {
+		//System.out.println("\""+text+"\"");
+		return "\""+text+"\"";
 		
-		//Wraps Text
-		//return wrap(text);
 	}
 
-	String wrap(String input) {
-		return'"' + input + '"';
-	}
-
-
-	
 
 
 
