@@ -2,7 +2,11 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
 import main.java.uk.ac.uos.i2p.JsonParser.JsonArrayToCollection;
@@ -21,71 +25,44 @@ class PolyTests {
 		
 		for (Object o : output) {
 			FinalCopy = FinalCopy + o;
-			System.out.println(FinalCopy);
+			//System.out.println(FinalCopy);
 			}
 		
 		assertEquals("/task/452359-4435382-6595137 /task/99012-65325148-3574826", FinalCopy);
 	}
 	
+	
+	// ObjectParser Tests
 	@Test
-	void ItemParserArray() throws Exception {
-		ObjectParser nathan = new ObjectParser("\"tasks\":[\"/task/452359-4435382-6595137\", \"/task/99012-65325148-3574826\"]");
-		Collection<String> output = nathan.jsonItem();
-		
-		String FinalCopy = "";
-		
-		for (Object o : output) {
-			FinalCopy = FinalCopy + o;
-			System.out.println(FinalCopy);
-			}
-		
-		assertEquals("/task/452359-4435382-6595137 /task/99012-65325148-3574826", FinalCopy);
+	void JsonObjectNum55Test() throws Exception {
+		ObjectParser nathan = new ObjectParser("\"Num\":\"55\"");
+		Map<Object, Object> jsonItems= nathan.jsonItem();
+		assertEquals(55, jsonItems.get("Num"));
+	}
+	@Test
+	void JsonObjectStringTest() throws Exception {
+		ObjectParser nathan = new ObjectParser("\"Where\":\"New New York\"");
+		Map<Object, Object> jsonItems= nathan.jsonItem();
+		assertEquals("New New York", jsonItems.get("Where"));
+	}
+	@Test
+	void JsonObjectBoolTest() throws Exception {
+		ObjectParser nathan = new ObjectParser("\"Really\":\"true\"");
+		Map<Object, Object> jsonItems= nathan.jsonItem();
+		assertEquals(true, jsonItems.get("Really"));
 	}
 	
 	@Test
-	void ItemParserString() throws Exception {
-		ObjectParser nathan = new ObjectParser("\"id\":\"s113867\"");
-		Collection<String> output = nathan.jsonItem();
+	void JsonObjectArrayTest() throws Exception {
+		ObjectParser nathan = new ObjectParser("\"Array\":\"[\\\"/task/452359-4435382-6595137\\\", \\\"/task/99012-65325148-3574826\\\"]\"");
+		Map<Object, Object> jsonItems= nathan.jsonItem();
+		jsonItems.get("Array");
 		
-		String FinalCopy = "";
-		
-		for (Object o : output) {
-			FinalCopy = FinalCopy + o;
-			System.out.println(FinalCopy);
-			}
-		
-		assertEquals("s113867", FinalCopy);
+		assertEquals("/task/452359-4435382-6595137 /task/99012-65325148-3574826", jsonItems.get("Array"));
 	}
 	
-	@Test
-	void ItemParserNumber() throws Exception {
-		ObjectParser nathan = new ObjectParser("\"Number\":234344");
-		Collection<String> output = nathan.jsonItem();
-		
-		String FinalCopy = "";
-		
-		for (Object o : output) {
-			FinalCopy = FinalCopy + o;
-			System.out.println(FinalCopy);
-			}
-		
-		assertEquals("234344", FinalCopy);
-	}
 	
-	@Test
-	void ItemParserBool() throws Exception {
-		ObjectParser nathan = new ObjectParser("\"Worked\":true");
-		Collection<String> output = nathan.jsonItem();
-		
-		String FinalCopy = "";
-		
-		for (Object o : output) {
-			FinalCopy = FinalCopy + o;
-			System.out.println(FinalCopy);
-			}
-		
-		assertEquals("true", FinalCopy);
-	}
+	
 	
 
 

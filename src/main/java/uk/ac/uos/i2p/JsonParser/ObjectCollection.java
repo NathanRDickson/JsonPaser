@@ -26,4 +26,11 @@ public class ObjectCollection implements Describer {
 
 
 	}
+
+
+	@Override
+	public Boolean describebool() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

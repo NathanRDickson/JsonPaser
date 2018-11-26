@@ -9,8 +9,14 @@ public class TextString implements Describer{
 	
 	@Override public String describe() {
 		//System.out.println("\""+text+"\"");
-		return "\""+text+"\"";
+		return text;
 		
+	}
+
+	@Override
+	public Boolean describebool() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

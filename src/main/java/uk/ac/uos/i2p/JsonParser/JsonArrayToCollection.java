@@ -5,7 +5,7 @@ import java.util.Collection;
 
 public class JsonArrayToCollection{
 	private String json;
-
+	
 	public JsonArrayToCollection(String json) {
 		this.json = json;
 	}
@@ -19,5 +19,7 @@ public class JsonArrayToCollection{
 		Collection<String> collection = Arrays.asList(FormattedArray.split(","));
 		return collection;
 	}
+	
+
 
 }

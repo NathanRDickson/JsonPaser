@@ -1,15 +1,21 @@
 package main.java.uk.ac.uos.i2p.JsonParser;
 
 public class Bool implements Describer{
-	private boolean bool;
+	private String bool;
 
-	public Bool(boolean input) {
+	public Bool(String input) {
 		bool = input;
 	}
 
 	@Override
-	public  String describe() {
-		return String.valueOf(bool);
+	public  Boolean describebool() {
+		return Boolean.valueOf(bool);
+	}
+
+	@Override
+	public String describe() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

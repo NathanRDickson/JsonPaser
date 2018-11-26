@@ -18,6 +18,10 @@ public class ItemParser {
 			NullToString nullItem = new NullToString();
 			describeList.addObCollection(nullItem);
 		}
+		else if (next.substring(0,1).equals("[") &&  next.substring(next.length()- 1 , next.length()).equals("]") ) {
+			JsonArrayToCollection ArrayDataObject = new JsonArrayToCollection(next);
+			describeList.addObCollection((Describer) ArrayDataObject);
+		}
 		else if (next.substring(0, 1).equals("\"") &&  next.substring(next.length()- 1 , next.length()).equals("\"")) {
 			
 	    	String testStringOutput = next.substring(1, next.length()-1);
@@ -29,7 +33,7 @@ public class ItemParser {
 			 	NumberCast numberOutput = new NumberCast(num);
 			 	describeList.addObCollection(numberOutput);	
 		}else if (next.equals("true") || next.equals("false")) {
-    			Bool booleanobject = new Bool (true);
+    			Bool booleanobject = new Bool (next);
 				describeList.addObCollection(booleanobject);
 	    }else {
 	    	throw new Exception("Not Vaild");
