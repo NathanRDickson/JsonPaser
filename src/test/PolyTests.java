@@ -30,23 +30,80 @@ class PolyTests {
 		assertEquals("/task/452359-4435382-6595137 /task/99012-65325148-3574826", FinalCopy);
 	}
 	
-	// ItemParser Tests
+	// ObjectParser Tests
 	@Test
 	void JsonObjectNum55Test() throws Exception {
-		ObjectParser nathan = new ObjectParser("\"Num\":\"55\"");
+		ObjectParser nathan = new ObjectParser("{\"Num\":\"55\"}");
 		Map<Object, Object> jsonItems= nathan.jsonObject();
 		assertEquals(55, jsonItems.get("Num"));
+	}
+	@Test
+	void JsonObjectNumBigTest() throws Exception {
+		ObjectParser nathan = new ObjectParser("{\"Num\":\"554332456\"}");
+		Map<Object, Object> jsonItems= nathan.jsonObject();
+		assertEquals(554332456, jsonItems.get("Num"));
+	}
+	@Test
+	void JsonObjectNumMinusTest() throws Exception {
+		ObjectParser nathan = new ObjectParser("{\"Num\":\"-55\"}");
+		Map<Object, Object> jsonItems= nathan.jsonObject();
+		assertEquals(-55, jsonItems.get("Num"));
+	}
+	@Test
+	void JsonObjectNumVerySmallMinusTest() throws Exception {
+		ObjectParser nathan = new ObjectParser("{\"Num\":\"-554332456\"}");
+		Map<Object, Object> jsonItems= nathan.jsonObject();
+		assertEquals(-554332456, jsonItems.get("Num"));
+	}
+	
+	@Test
+	void JsonObjectStringTest() throws Exception {
+		ObjectParser nathan = new ObjectParser("{\"Legend\":\"He will speak those words only to one like himself.\"}");
+		Map<Object, Object> jsonItems= nathan.jsonObject();
+		assertEquals("He will speak those words only to one like himself.", jsonItems.get("Legend"));
 	}
 	
 	@Test
 	void JsonObjectDoubleNum55Test() throws Exception {
-		ObjectParser nathan = new ObjectParser("\"Num\":\"55\",\"SecNum\":\"66\"");
+		ObjectParser nathan = new ObjectParser("{\"Num\":\"55\",\"SecNum\":\"66\"}");
 		Map<Object, Object> jsonItems= nathan.jsonObject();
 		assertEquals(55, jsonItems.get("Num"));
 		assertEquals(66, jsonItems.get("SecNum"));
 	}
 	
+	@Test
+	void JsonObjectDoubleNum55AndStringTest() throws Exception {
+		ObjectParser nathan = new ObjectParser("{\"Num\":\"55\",\"Time\":\"timey wimey\"}");
+		Map<Object, Object> jsonItems= nathan.jsonObject();
+		assertEquals(55, jsonItems.get("Num"));
+		assertEquals("timey wimey", jsonItems.get("Time"));
+	}
 	
+	@Test
+	void JsonObjectArrayTest() throws Exception {
+		ObjectParser nathan = new ObjectParser("{\"tasks\":[\"/task/452359-4435382-6595137\"]}");
+		Map<Object, Object> jsonItems= nathan.jsonObject();
+		String[] out = (String[]) jsonItems.get("tasks");
+		assertEquals("/task/452359-4435382-6595137", out[0]);
+	}
+	
+	//@Test
+	//void JsonObjectArray2ItemTest() throws Exception {
+	//	ObjectParser nathan = new ObjectParser("{\"tasks\":[\"/task/452359-4435382-6595137\",\"/task/99012-65325148-3574826\"]}");
+	//	Map<Object, Object> jsonItems= nathan.jsonObject();
+	//	String[] out = (String[]) jsonItems.get("tasks");
+	//	assertEquals("/task/452359-4435382-6595137", out[0]);
+	//}
+	
+	@Test
+	void JsonObjectNestedTest() throws Exception {
+		ObjectParser nathan = new ObjectParser("{\"Num\":\"55\",\"GlossEntry\":{65}}");
+		Map<Object, Object> jsonItems= nathan.jsonObject();
+		assertEquals(55, jsonItems.get("Num"));
+		assertEquals(65, jsonItems.get("GlossEntry"));
+	}
+
+
 	// ItemParser Tests
 	@Test
 	void JsonItemNum55Test() throws Exception {
@@ -69,7 +126,7 @@ class PolyTests {
 	
 	@Test
 	void JsonItemArrayTest() throws Exception {
-		ItemParser nathan = new ItemParser("\"GridLock\":\"[\"Car0\",\"Car1\"]\"");
+		ItemParser nathan = new ItemParser("\"GridLock\":[\"Car0\",\"Car1\"]");
 		Map<Object, Object> jsonItems= nathan.jsonItem();
 		String[] out = (String[]) jsonItems.get("GridLock");
 		assertEquals("Car0", out[0]);

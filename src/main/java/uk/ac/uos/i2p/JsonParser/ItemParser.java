@@ -25,12 +25,12 @@ public class ItemParser implements JsonParser {
 		Iterator<String> itr = NameItemSplit.iterator();
 		String name = itr.next();
 		String item = itr.next();
-		//System.out.println(item);
+		System.out.println(item);
 		String FirstChar = item.substring(0, 1);
 		String LastChar = item.substring(item.length()- 1 , item.length());
 		
-		String SecChar = item.substring(1, 2);
-		String SecLastChar = item.substring(item.length()- 2 , item.length() - 1);
+		//String SecChar = item.substring(1, 2);
+		//String SecLastChar = item.substring(item.length()- 2 , item.length() - 1);
 		
 		
 		name = name.substring(1, name.length()-1);
@@ -47,10 +47,16 @@ public class ItemParser implements JsonParser {
 			Boolean output = booleanobject.describebool();
 			jsonItems.put(name,output);
 		} 
-		else if (SecChar.equals("[") &&  SecLastChar.equals("]") ) {
+		else if (FirstChar.equals("[") &&  LastChar.equals("]") ) {
 			JsonStringToArray ArrayDataObject = new JsonStringToArray(item);
 			String[] Arr = ArrayDataObject.jsonStringToArray();
 			jsonItems.put(name,Arr);
+		}
+		else if (FirstChar.equals("{") &&  LastChar.equals("}") ) {
+			System.out.println("Nest");
+			ObjectParser NestedObject = new ObjectParser("{\"Num\":\"55\"}");
+			Map<Object, Object> jsonItems= NestedObject.jsonObject();
+			jsonItems.put(name,jsonItems);
 		}
 		else if ((FirstChar.equals("\"") && LastChar.equals("\"") )== true) {
 		    	//String testStringOutput = item.substring(1, item.length()-1);
@@ -64,7 +70,7 @@ public class ItemParser implements JsonParser {
 			Boolean output = booleanobject.describebool();
 			jsonItems.put(name,output);
 		}else {
-	    	throw new Exception("Not Vaild");
+	    	throw new Exception("Not Vaild Java Item");
 	    }
 	
 	  return jsonItems;
