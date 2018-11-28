@@ -18,7 +18,7 @@ public class ObjectParser {
 		String FirstChar = json.substring(0, 1);
 		String LastChar = json.substring(json.length()- 1 , json.length());
 		
-		
+		//Comment 
 		if ((FirstChar.equals("{") && LastChar.equals("}") )== true) {
 			
 		String object = json.substring(1, json.length()-1);
