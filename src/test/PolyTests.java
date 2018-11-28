@@ -97,7 +97,7 @@ class PolyTests {
 	
 	@Test
 	void JsonObjectNestedTest() throws Exception {
-		ObjectParser nathan = new ObjectParser("{\"Num\":\"55\",\"GlossEntry\":{65}}");
+		ObjectParser nathan = new ObjectParser("{\"Num\":\"55\",\"GlossEntry\":{\"\"Nest\":\"65\"}}");
 		Map<Object, Object> jsonItems= nathan.jsonObject();
 		assertEquals(55, jsonItems.get("Num"));
 		assertEquals(65, jsonItems.get("GlossEntry"));

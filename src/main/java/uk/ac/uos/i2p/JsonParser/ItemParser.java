@@ -35,8 +35,15 @@ public class ItemParser implements JsonParser {
 		
 		name = name.substring(1, name.length()-1);
 		item = item.substring(1, item.length()-1);
-				
-		if (item.equals("null")) {
+		
+		
+		if (FirstChar.equals("{") &&  LastChar.equals("}") ) {
+			System.out.println("Nest");
+			ObjectParser NestedObject = new ObjectParser(item);
+			Map<Object, Object> jsonItems= NestedObject.jsonObject();
+			jsonItems.put(name,jsonItems);
+		}		
+		else if (item.equals("null")) {
 			jsonItems.put(name,null);
 		}else if (isNumeric(item)) {
 			int num = Integer.parseInt(item);
@@ -51,12 +58,6 @@ public class ItemParser implements JsonParser {
 			JsonStringToArray ArrayDataObject = new JsonStringToArray(item);
 			String[] Arr = ArrayDataObject.jsonStringToArray();
 			jsonItems.put(name,Arr);
-		}
-		else if (FirstChar.equals("{") &&  LastChar.equals("}") ) {
-			System.out.println("Nest");
-			ObjectParser NestedObject = new ObjectParser("{\"Num\":\"55\"}");
-			Map<Object, Object> jsonItems= NestedObject.jsonObject();
-			jsonItems.put(name,jsonItems);
 		}
 		else if ((FirstChar.equals("\"") && LastChar.equals("\"") )== true) {
 		    	//String testStringOutput = item.substring(1, item.length()-1);
