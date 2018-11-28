@@ -1,5 +1,9 @@
 package main.java.uk.ac.uos.i2p.JsonParser;
 
+import java.io.IOException;
+import java.io.PushbackReader;
+import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -19,13 +23,17 @@ public class ItemParser implements JsonParser {
 	@Override
 	public Map<Object, Object> jsonItem() throws Exception {
         
+		
+		System.out.println("\n" + json + "\n");
         // add elements to the array list
-		Collection<String> NameItemSplit = Arrays.asList(json.split(":"));
+		//Collection<String> NameItemSplit = Arrays.asList(json.split(":"));
+		
+		Collection<String> NameItemSplit = jsonItemSplitter(json);
 		
 		Iterator<String> itr = NameItemSplit.iterator();
 		String name = itr.next();
 		String item = itr.next();
-		System.out.println(item);
+		//System.out.println(item);
 		String FirstChar = item.substring(0, 1);
 		String LastChar = item.substring(item.length()- 1 , item.length());
 		
@@ -38,10 +46,11 @@ public class ItemParser implements JsonParser {
 		
 		
 		if (FirstChar.equals("{") &&  LastChar.equals("}") ) {
-			System.out.println("Nest");
-			ObjectParser NestedObject = new ObjectParser(item);
-			Map<Object, Object> jsonItems= NestedObject.jsonObject();
-			jsonItems.put(name,jsonItems);
+			System.out.println("\nNest");
+			ObjectParser NestedObject = new ObjectParser("{" + item + "}");
+			Map<Object, Object> nestedJsonItems= NestedObject.jsonObject();
+			jsonItems.putAll(nestedJsonItems);
+			System.out.println("\n" + name + " " + jsonItems + nestedJsonItems);
 		}		
 		else if (item.equals("null")) {
 			jsonItems.put(name,null);
@@ -80,6 +89,47 @@ public class ItemParser implements JsonParser {
 	public static boolean isNumeric(String str)
 	{
 	  return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+	}
+	
+	
+	private Collection<String> jsonItemSplitter(String object) throws IOException {
+		StringReader stringReader = new StringReader(object);
+		PushbackReader reader2 = new PushbackReader(stringReader);
+
+		ArrayList<String> items =new ArrayList<String>(); 
+		int c = 0;
+		int lastSubString = -1;
+		int arrays = 0;
+		int objects = 0;
+		String subString = "";
+		
+		
+        for (int x = 0; x <= object.length()-1 ; x++) {
+    		c = reader2.read();
+        	//char A = ((char)c);
+        	if ('[' == c)arrays++;
+        	if (']' == c)arrays--;
+        	if ('{' == c)objects++;
+        	if ('}' == c)objects--;
+        	
+        	if ((':' == c)&& arrays < 1 && objects < 1) { 
+        		subString = object.substring(lastSubString + 1 , x);
+        		
+        		items.add(subString);
+        		lastSubString = x;
+        	}
+        			
+    	} 
+        subString = object.substring(lastSubString + 1 , object.length());
+		items.add(subString);
+        
+        //System.out.print("\n"+subString);
+        
+		for (String o : items) {
+			//System.out.print("\n"+ o);
+			}
+		Collection<String> NameItemSplit = items;
+		return NameItemSplit;
 	}
 	
 	
