@@ -4,13 +4,10 @@ import java.io.IOException;
 import java.io.PushbackReader;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-
 
 public class ItemParser implements JsonParser {
 	private String json;
@@ -23,27 +20,18 @@ public class ItemParser implements JsonParser {
 	@Override
 	public Map<Object, Object> jsonItem() throws Exception {
         
-		
 		System.out.println("\n" + json + "\n");
-        // add elements to the array list
-		//Collection<String> NameItemSplit = Arrays.asList(json.split(":"));
-		
+
 		Collection<String> NameItemSplit = jsonItemSplitter(json);
 		
 		Iterator<String> itr = NameItemSplit.iterator();
 		String name = itr.next();
 		String item = itr.next();
-		//System.out.println(item);
 		String FirstChar = item.substring(0, 1);
 		String LastChar = item.substring(item.length()- 1 , item.length());
 		
-		//String SecChar = item.substring(1, 2);
-		//String SecLastChar = item.substring(item.length()- 2 , item.length() - 1);
-		
-		
 		name = name.substring(1, name.length()-1);
 		item = item.substring(1, item.length()-1);
-		
 		
 		if (FirstChar.equals("{") &&  LastChar.equals("}") ) {
 			System.out.println("\nNest");
@@ -69,8 +57,6 @@ public class ItemParser implements JsonParser {
 			jsonItems.put(name,Arr);
 		}
 		else if ((FirstChar.equals("\"") && LastChar.equals("\"") )== true) {
-		    	//String testStringOutput = item.substring(1, item.length()-1);
-		    	//System.out.println(testStringOutput);
 		    	TextString StringOutputOut = new TextString(item);
 		    	String outputString = StringOutputOut.describe();
 		    	jsonItems.put(name,outputString);
@@ -86,11 +72,11 @@ public class ItemParser implements JsonParser {
 	  return jsonItems;
 	
 	}
+	
 	public static boolean isNumeric(String str)
 	{
 	  return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
 	}
-	
 	
 	private Collection<String> jsonItemSplitter(String object) throws IOException {
 		StringReader stringReader = new StringReader(object);
@@ -123,10 +109,7 @@ public class ItemParser implements JsonParser {
         subString = object.substring(lastSubString + 1 , object.length());
 		items.add(subString);
         
-        //System.out.print("\n"+subString);
-        
 		for (String o : items) {
-			//System.out.print("\n"+ o);
 			}
 		Collection<String> NameItemSplit = items;
 		return NameItemSplit;
