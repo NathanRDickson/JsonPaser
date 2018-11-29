@@ -1,4 +1,4 @@
-package main.java.uk.ac.uos.i2p.JsonParser;
+package main.java.uk.ac.uos.i2p.JsonParserMK2;
 
 import java.io.IOException;
 import java.io.PushbackReader;
@@ -26,24 +26,20 @@ private PushbackReader reader;
 				c = reader.read();
 			}
 			while (Character.isWhitespace(c));
-				return new Symbol(Symbol.Type.SPACE);
-			}
-		if (Character.isLetterOrDigit(c)) {
-			StringBuffer value = new StringBuffer();
+			
+			if (-1 != c) reader.unread(c);
+			return new Symbol(Symbol.Type.SPACE);
+			
+		}
+		System.out.print(c);
+			StringBuffer word = new StringBuffer();
 			do {
-				value.append((char)c);
+				word.append((char)c);
 				c = reader.read();
 			}
-			while (Character.isLetterOrDigit(c));	
-		}
-		reader.unread(c);
-		return new Symbol(Symbol.Type.OTHER, Character.toString((char)c));
+			while (Character.isLetterOrDigit(c));
+			if (-1 != c) reader.unread(c);
+			return new Symbol(Symbol.Type.WORD , word.toString());
 	
    }
 }
-	
-	
-	
-	/*
-	
-	 */

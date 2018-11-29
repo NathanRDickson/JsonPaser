@@ -1,4 +1,4 @@
-package main.java.uk.ac.uos.i2p.JsonParser;
+package main.java.uk.ac.uos.i2p.JsonParserMK2;
 
 import java.io.IOException;
 import java.io.PushbackReader;
