@@ -108,7 +108,7 @@ class PolyTests {
 	 
 	 @Test
 	void JsonObjectNestedWithDoubleNestItemTest() throws Exception {
-		ObjectParser testData = new ObjectParser("{\"Num\":\"55\",\"GlossEntry\":{\"FirstNest\":\"Fez\",\"GlossEntry\":{\"Second}Nest\":\"65\",\"NestedNum\":\"44\"}}}");
+		ObjectParser testData = new ObjectParser("{\"Num\":\"55\",\"GlossEntry\":{\"FirstNest\":\"Fez\",\"GlossEntry\":{\"SecondNest\":\"65\",\"NestedNum\":\"44\"}}}");
 		Map<Object, Object> jsonItems= testData.jsonObject();
 		assertEquals(55, jsonItems.get("Num"));
 		assertEquals("Fez", jsonItems.get("FirstNest"));

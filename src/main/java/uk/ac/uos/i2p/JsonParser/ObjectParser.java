@@ -17,12 +17,6 @@ public class ObjectParser {
 		this.json = json;
 	}
 	
-	private PushbackReader reader;
-	
-	public ObjectParser(StringReader stringReader) {
-		reader = new PushbackReader(stringReader);
-	}
-	
 	public Map<Object, Object> jsonObject() throws Exception {
 		
 		
@@ -34,7 +28,6 @@ public class ObjectParser {
 		if ((FirstChar.equals("{") && LastChar.equals("}") )== true) {
 
 		String object = json.substring(1, json.length()-1);
-		
 		
 		Collection<String> NameItemSplit = jsonItemSplitter(object);
 				
@@ -61,14 +54,9 @@ public class ObjectParser {
 		}
 	}
 
-	
-	
-	
-	
-	
 	private Collection<String> jsonItemSplitter(String object) throws IOException {
 		StringReader stringReader = new StringReader(object);
-		PushbackReader reader2 = new PushbackReader(stringReader);
+		PushbackReader reader = new PushbackReader(stringReader);
 
 		ArrayList<String> items =new ArrayList<String>(); 
 		int c = 0;
@@ -79,8 +67,7 @@ public class ObjectParser {
 		
 		
         for (int x = 0; x <= object.length()-1 ; x++) {
-    		c = reader2.read();
-        	//char A = ((char)c);
+    		c = reader.read();
         	if ('[' == c)arrays++;
         	if (']' == c)arrays--;
         	if ('{' == c)objects++;
@@ -88,23 +75,15 @@ public class ObjectParser {
         	
         	if ((',' == c)&& arrays < 1 && objects < 1) { 
         		subString = object.substring(lastSubString + 1 , x);
-        		System.out.print("\nArray SubSubstring: "+subString);
         		items.add(subString);
         		lastSubString = x;
-        	}
-        			
+        	}		
     	} 
+        
         subString = object.substring(lastSubString + 1 , object.length());
 		items.add(subString);
-        
-        System.out.print("\nFinal SubSubstring: "+subString);
-        
-		for (String o : items) {
-			System.out.print("\n"+ o);
-			}
+  
 		Collection<String> NameItemSplit = items;
 		return NameItemSplit;
 	}
-	
-	
 }
