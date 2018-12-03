@@ -32,14 +32,24 @@ private PushbackReader reader;
 			
 		}
 		System.out.print(c);
+		if (Character.isLetterOrDigit(c) || '/' == c) {
 			StringBuffer word = new StringBuffer();
 			do {
 				word.append((char)c);
 				c = reader.read();
 			}
-			while (Character.isLetterOrDigit(c));
+			while (Character.isLetterOrDigit(c) || '/' == c);
 			if (-1 != c) reader.unread(c);
 			return new Symbol(Symbol.Type.WORD , word.toString());
+		}
+		System.out.print(c);
+		return new Symbol(Symbol.Type.OTHER, Character.toString((char)c));
 	
    }
 }
+	
+	
+	
+	/*
+	
+	 */

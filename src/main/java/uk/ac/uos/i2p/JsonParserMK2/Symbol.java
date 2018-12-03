@@ -16,4 +16,6 @@ public class Symbol {
 			this(type, null);
 		}
 		
+		
+		
 }

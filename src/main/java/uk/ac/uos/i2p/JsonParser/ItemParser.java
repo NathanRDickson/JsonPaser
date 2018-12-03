@@ -20,7 +20,7 @@ public class ItemParser implements JsonParser {
 	@Override
 	public Map<Object, Object> jsonItem() throws Exception {
 
-		System.out.println("\n" + json + "\n");
+		//System.out.println("\n" + json + "\n");
 
 		Collection<String> NameItemSplit = jsonItemSplitter(json);
 
@@ -34,11 +34,11 @@ public class ItemParser implements JsonParser {
 		item = item.substring(1, item.length() - 1);
 
 		if (FirstChar.equals("{") && LastChar.equals("}")) {
-			System.out.println("\nNest");
+			//System.out.println("\nNest");
 			ObjectParser NestedObject = new ObjectParser("{" + item + "}");
 			Map<Object, Object> nestedJsonItems = NestedObject.jsonObject();
 			jsonItems.putAll(nestedJsonItems);
-			System.out.println("\n" + name + " " + jsonItems + nestedJsonItems);
+			//System.out.println("\n" + name + " " + jsonItems + nestedJsonItems);
 		} else if (item.equals("null")) {
 			jsonItems.put(name, null);
 		} else if (isNumeric(item)) {
