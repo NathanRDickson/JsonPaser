@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-
-import main.java.uk.ac.uos.i2p.JsonParser.JsonArrayToCollection;
 import main.java.uk.ac.uos.i2p.JsonParser.ObjectParser;
 import main.java.uk.ac.uos.i2p.JsonParser.ItemParser;
 
@@ -230,25 +228,6 @@ class PolyTests {
 		String[] out = (String[]) jsonItems.get("GridLock");
 		assertEquals("Car0", out[0]);
 		assertEquals("Car1", out[1]);
-	}
-	
-	
-	
-	
-	//Old Tests
-	@Test
-	void jsonArrayToCollectionTest() {
-		JsonArrayToCollection testData = new JsonArrayToCollection("[\"/task/452359-4435382-6595137\", \"/task/99012-65325148-3574826\"]");
-		Collection<String> output = testData.jsonArrayToCollection();
-		
-		String FinalCopy = "";
-		
-		for (Object o : output) {
-			FinalCopy = FinalCopy + o;
-			//System.out.println(FinalCopy);
-			}
-		
-		assertEquals("/task/452359-4435382-6595137 /task/99012-65325148-3574826", FinalCopy);
 	}
 	
 	
