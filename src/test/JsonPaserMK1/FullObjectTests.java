@@ -7,31 +7,12 @@ import main.java.uk.ac.uos.i2p.JsonParser.ObjectParser;
 
 
 
-class FullObjectTestsMK1 {
+class FullObjectTests {
 	
 	// ObjectParser Tests
 	@Test
 	void JsonObjectNum55Test() throws Exception {
 		ObjectParser testData = new ObjectParser("{\"Num\":\"55\"}");
-		Map<Object, Object> jsonItems= testData.jsonObject();
-		assertEquals(55, jsonItems.get("Num"));
-	}
-	@Test
-	void JsonObjectNum55TestSpaces() throws Exception {
-		ObjectParser testData = new ObjectParser("{ \"Num\" : \"55\" }");
-		Map<Object, Object> jsonItems= testData.jsonObject();
-		assertEquals(55, jsonItems.get("Num"));
-	}
-	@Test
-	void JsonObjectNum55TestExtremeSpaces() throws Exception {
-		ObjectParser testData = new ObjectParser("{     \"Num\"    :     \"55\"    }");
-		Map<Object, Object> jsonItems= testData.jsonObject();
-		assertEquals(55, jsonItems.get("Num"));
-	}
-	
-	@Test
-	void JsonObjectNum55TestExtremeSpacesTabsAndBreakLines() throws Exception {
-		ObjectParser testData = new ObjectParser("{   \t  \"Num\"    :   \n  \"55\"    }");
 		Map<Object, Object> jsonItems= testData.jsonObject();
 		assertEquals(55, jsonItems.get("Num"));
 	}
@@ -93,74 +74,6 @@ class FullObjectTestsMK1 {
 		assertEquals("/task/452359-4435382-6595137", out[0]);
 	}
 	
-	//NestedTests
-	 @Test
-	void JsonObjectNestedTest() throws Exception {
-		ObjectParser testData = new ObjectParser("{\"Num\":\"55\",\"GlossEntry\":{\"Nest\":\"65\"}}");
-		Map<Object, Object> jsonItems= testData.jsonObject();
-		assertEquals(55, jsonItems.get("Num"));
-		assertEquals(65, jsonItems.get("Nest"));
-	}
-	
-	 @Test
-	void JsonObjectNestedWithMoreThanOneItemTest() throws Exception {
-		ObjectParser testData = new ObjectParser("{\"Num\":\"55\",\"GlossEntry\":{\"FirstNest\":\"65\",\"NestedNum\":\"44\"}}");
-		Map<Object, Object> jsonItems= testData.jsonObject();
-		assertEquals(55, jsonItems.get("Num"));
-		assertEquals(65, jsonItems.get("FirstNest"));
-		assertEquals(44, jsonItems.get("NestedNum"));
-	}
-	 
-	 @Test
-	void JsonObjectNestedWithStringeItemTest() throws Exception {
-		ObjectParser testData = new ObjectParser("{\"Num\":\"55\",\"GlossEntry\":{\"FirstNest\":\"Fez\",\"NestedNum\":\"44\"}}");
-		Map<Object, Object> jsonItems= testData.jsonObject();
-		assertEquals(55, jsonItems.get("Num"));
-		assertEquals("Fez", jsonItems.get("FirstNest"));
-		assertEquals(44, jsonItems.get("NestedNum"));
-	}
-	
-	 
-	 @Test
-	void JsonObjectNestedWithDoubleNestItemTest() throws Exception {
-		ObjectParser testData = new ObjectParser("{\"Num\":\"55\",\"GlossEntry\":{\"FirstNest\":\"Fez\",\"GlossEntry\":{\"SecondNest\":\"65\",\"NestedNum\":\"44\"}}}");
-		Map<Object, Object> jsonItems= testData.jsonObject();
-		assertEquals(55, jsonItems.get("Num"));
-		assertEquals("Fez", jsonItems.get("FirstNest"));
-		assertEquals(44, jsonItems.get("NestedNum"));
-	}
-	 
-	 @Test
-	void JsonObjectNestedWithDoubleNestItemTestAndWhiteSpace() throws Exception {
-		ObjectParser testData = new ObjectParser("{   \"Num\":    \"55\",\"GlossEntry\"   :{   \"FirstNest\":\"Fez\",\"GlossEntry\":   {\"SecondNest\"   :   \"65\",\"NestedNum\"   :\"44\"}}}");
-		Map<Object, Object> jsonItems= testData.jsonObject();
-		assertEquals(55, jsonItems.get("Num"));
-		assertEquals("Fez", jsonItems.get("FirstNest"));
-		assertEquals(44, jsonItems.get("NestedNum"));
-	}
-	 
-	
-	 @Test
-	void JsonObjectNestedArrayTest() throws Exception {
-		ObjectParser testData = new ObjectParser("{\"Num\":\"55\",\"GlossEntry\":{\"GridLock\":[\"Car0\",\"Car1\"]}}");
-		Map<Object, Object> jsonItems= testData.jsonObject();
-		assertEquals(55, jsonItems.get("Num"));
-		String[] out = (String[]) jsonItems.get("GridLock");
-		assertEquals("Car0", out[0]);
-		assertEquals("Car1", out[1]);
-	}
-	
-	@Test
-	void JsonObjectNestedArrayMoreThanOneItemTest() throws Exception {
-		ObjectParser testData = new ObjectParser("{\"Num\":\"55\",\"GlossEntry\":{\"GridLock\":[\"Car0\",\"Car1\"],\"Age\":\"73\"}}");
-		Map<Object, Object> jsonItems= testData.jsonObject();
-		assertEquals(73, jsonItems.get("Age"));
-		String[] out = (String[]) jsonItems.get("GridLock");
-		assertEquals("Car0", out[0]);
-		assertEquals("Car1", out[1]);
-	}
-	
-	
 	@Test
 	void JsonObjectJsonDotOrg1() throws Exception {
 		ObjectParser testData = new ObjectParser("{\"glossary\":{\"title\":\"example glossary\"}}");
@@ -168,8 +81,6 @@ class FullObjectTestsMK1 {
 		assertEquals("example glossary", jsonItems.get("title"));
 
 	}
-	
-
 	
 	@Test
 	// Note the Problem Where By It Will Only Find the Last Item Called title.

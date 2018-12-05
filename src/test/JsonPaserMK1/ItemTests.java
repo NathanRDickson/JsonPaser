@@ -8,7 +8,7 @@ import main.java.uk.ac.uos.i2p.JsonParser.ItemParser;
 
 
 
-class ItemTestsMK1 {
+class ItemTests {
 	
 	// ItemParser Tests
 	@Test
