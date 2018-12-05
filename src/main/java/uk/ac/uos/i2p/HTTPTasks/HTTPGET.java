@@ -9,7 +9,11 @@ public class HTTPGET {
         	String inputurl = "http://i2j.openode.io/student?id="+student;
         	
 			GetTasks testData = new GetTasks(inputurl);
-			SendResult SendData = new SendResult();
+			
+			//String posturl = "/answer/7286";
+	    	//String answer = "68";
+	    	
+			SendResult SendData = new SendResult("/answer/7286","68");
 			SendData.main();
 			
     		Map<Object, Object> jsonItems= testData.jsonTask();

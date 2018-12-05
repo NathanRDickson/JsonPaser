@@ -1,39 +1,64 @@
 package main.java.uk.ac.uos.i2p.HTTPTasks;
-import java.io.*;
-import java.net.*;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class SendResult {
+	
+	String posturl;
+	String answer;
+	
+	SendResult(String posturl, String answer) {
+		this.posturl = posturl;
+		this.answer = answer;
+		
+		
+	}
+	
+	
+	
     public void main() throws Exception {
 
-    	System.out.println("Cake");
-    	String[] args = {"http://i2j.openode.io/answer/d3ae45","68"};
-    	
-            URL url = new URL("http://i2j.openode.io/answer/d3ae45");
-            Map<String,Object> params = new LinkedHashMap<>();
-            params.put("name","Cake");
-            
-            StringBuilder postData = new StringBuilder();
-            for (Map.Entry<String,Object> param : params.entrySet()) {
-                if (postData.length() != 0) postData.append('&');
-                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-                postData.append('=');
-                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
-            }
-            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+    	String posturl = "/answer/7286";
+    	String answer = "68";
+    			
+    			
+    	 String url = "http://i2j.openode.io";
+         url = url + posturl;
+         URL finalposturl = new URL(url);
+         HttpURLConnection con = (HttpURLConnection) finalposturl.openConnection();
 
-            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-            conn.setDoOutput(true);
-            conn.getOutputStream().write(postDataBytes);
+         //add request header
+         con.setRequestMethod("POST");
+         
+         // Send post request
+         con.setDoOutput(true);
+         DataOutputStream road = new DataOutputStream(con.getOutputStream());
+         road.writeBytes(answer);
+         road.flush();
+         road.close();
 
-            Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+         int responseCode = con.getResponseCode();
+         System.out.println("\nSending 'POST' request to URL : " + url);
+         System.out.println("Post parameters : " + answer);
+         System.out.println("Response Code : " + responseCode);
 
-            for (int c; (c = in.read()) >= 0;)
-                System.out.print((char)c);
-        }
+         BufferedReader in = new BufferedReader(
+                 new InputStreamReader(con.getInputStream()));
+         String inputLine;
+         StringBuffer response = new StringBuffer();
+
+         while ((inputLine = in.readLine()) != null) {
+                         response.append(inputLine);
+         }
+         in.close();
+         
+         //print result
+         System.out.println(response.toString());
+
     	
     }
+}
+
