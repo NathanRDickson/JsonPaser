@@ -10,24 +10,24 @@ public class Maths {
 		this.val2 = value2;
 
 	}
+
 	public String add() throws Exception {
-		int	intVal1 = Integer.parseInt(val1);
-		int	intVal2 = Integer.parseInt(val2);
+		int intVal1 = Integer.parseInt(val1);
+		int intVal2 = Integer.parseInt(val2);
 		int ans = intVal1 + intVal2;
 		return Integer.toString(ans);
 	}
+
 	public String multiply() {
-		int	intVal1 = Integer.parseInt(val1);
-		int	intVal2 = Integer.parseInt(val2);
+		int intVal1 = Integer.parseInt(val1);
+		int intVal2 = Integer.parseInt(val2);
 		int ans = intVal1 * intVal2;
 		return Integer.toString(ans);
 	}
+
 	public String concat() {
-		String result = val1+val2;
+		String result = val1 + val2;
 		return result;
 	}
 
-
-
 }
-

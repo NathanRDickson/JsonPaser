@@ -1,4 +1,5 @@
 package main.java.uk.ac.uos.i2p.HTTPTasks;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -10,21 +11,19 @@ public class SendResult {
 	String posturl;
 	String answer;
 
-	SendResult(String posturl, String answer) {
+	public SendResult(String posturl, String answer) {
 		this.posturl = posturl;
 		this.answer = answer;
-
-
 	}
 
-	public void main() throws Exception {
+	public String[] postResults() throws Exception {
 
 		String url = "http://i2j.openode.io";
 		url = url + posturl;
 		URL finalposturl = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) finalposturl.openConnection();
 
-		//add request header
+		// add request header
 		con.setRequestMethod("POST");
 
 		// Send post request
@@ -39,9 +38,9 @@ public class SendResult {
 		System.out.println("Post parameters : " + answer);
 		System.out.println("Response Code : " + responseCode);
 
-		BufferedReader in = new BufferedReader(
-				new InputStreamReader(con.getInputStream()));
+		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 		String inputLine;
+
 		StringBuffer response = new StringBuffer();
 
 		while ((inputLine = in.readLine()) != null) {
@@ -49,10 +48,10 @@ public class SendResult {
 		}
 		in.close();
 
-		//print result
+		// print result
 		System.out.println(response.toString());
 
-
+		String[] sendConfirmation = { url, answer, Integer.toString(responseCode), response.toString() };
+		return sendConfirmation;
 	}
 }
-

@@ -11,7 +11,7 @@ import main.java.uk.ac.uos.i2p.JsonParser.ObjectParser;
 
 public class DoTask {
 	private String url;
-	public  Map<Object, Object> tasks = new HashMap<Object, Object>();
+	public Map<Object, Object> tasks = new HashMap<Object, Object>();
 
 	public DoTask(String url) {
 		this.url = url;
@@ -20,13 +20,12 @@ public class DoTask {
 
 	public Map<Object, Object> jsonTask() throws Exception {
 
-		URL oracle = new URL(" http://i2j.openode.io" + url );
+		URL oracle = new URL(" http://i2j.openode.io" + url);
 
 		URLConnection yc = oracle.openConnection();
 		BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
 
 		String inputLine = null;
-
 
 		while ((inputLine = in.readLine()) != null) {
 			System.out.println(inputLine);
@@ -37,7 +36,7 @@ public class DoTask {
 			String instruction = (String) tasks.get("instruction");
 			String[] tasksarr = (String[]) jsonItems.get("parameters");
 
-			Maths instructionProcessor = new Maths(tasksarr[0],tasksarr[1]);
+			Maths instructionProcessor = new Maths(tasksarr[0], tasksarr[1]);
 
 			if (instruction.equals("add")) {
 				String answer = instructionProcessor.add();
@@ -45,7 +44,7 @@ public class DoTask {
 			} else if (instruction.equals("multiply")) {
 				String answer = instructionProcessor.multiply();
 				tasks.put("answer", answer);
-			} else  if (instruction.equals("concat")) {
+			} else if (instruction.equals("concat")) {
 				String answer = instructionProcessor.concat();
 				tasks.put("answer", answer);
 			} else {

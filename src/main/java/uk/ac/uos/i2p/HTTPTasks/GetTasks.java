@@ -1,4 +1,5 @@
 package main.java.uk.ac.uos.i2p.HTTPTasks;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -8,11 +9,9 @@ import java.util.Map;
 
 import main.java.uk.ac.uos.i2p.JsonParser.ObjectParser;
 
-
-
 public class GetTasks {
 	private static String url;
-	public  Map<Object, Object> tasks = new HashMap<Object, Object>();
+	public Map<Object, Object> tasks = new HashMap<Object, Object>();
 
 	public GetTasks(String url) {
 		GetTasks.url = url;
