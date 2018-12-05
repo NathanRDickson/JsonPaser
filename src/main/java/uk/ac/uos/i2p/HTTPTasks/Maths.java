@@ -2,25 +2,30 @@ package main.java.uk.ac.uos.i2p.HTTPTasks;
 
 public class Maths {
 
-	private int val1;
-	private int val2;
+	private String val1;
+	private String val2;
 
 	public Maths(String value1, String value2) {
-		this.val1 = Integer.parseInt(value1);
-		this.val2 = Integer.parseInt(value2);
+		this.val1 = value1;
+		this.val2 = value2;
 
 	}
-	  public int add() throws Exception {
-		  return val1 + val2;
+	 public String add() throws Exception {
+			int	intVal1 = Integer.parseInt(val1);
+			int	intVal2 = Integer.parseInt(val2);
+			int ans = intVal1 + intVal2;
+			return Integer.toString(ans);
 	  }
-	public int multiply() {
-		// TODO Auto-generated method stub
-		return val1 * val2;
+	public String multiply() {
+		int	intVal1 = Integer.parseInt(val1);
+		int	intVal2 = Integer.parseInt(val2);
+		int ans = intVal1 * intVal2;
+		return Integer.toString(ans);
 	}
-	public String concat() {
-		String result = ""+val1+val2;
-		return result;
-	}
+		public String concat() {
+			String result = val1+val2;
+			return result;
+		}
 	
 	
 

@@ -17,13 +17,7 @@ public class SendResult {
 		
 	}
 	
-	
-	
     public void main() throws Exception {
-
-    	String posturl = "/answer/7286";
-    	String answer = "68";
-    			
     			
     	 String url = "http://i2j.openode.io";
          url = url + posturl;

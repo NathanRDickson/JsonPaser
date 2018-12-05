@@ -36,37 +36,31 @@ public class DoTask {
 	    		ObjectParser testData = new ObjectParser(inputLine);
 	    		Map<Object, Object> jsonItems = testData.jsonObject();
 	    		tasks.putAll(jsonItems);
-	          //  System.out.println(inputLine);
-	    		String instruction = (String) tasks.get("instruction");
+	            
+	    	    String instruction = (String) tasks.get("instruction");
 	            String[] tasksarr = (String[]) jsonItems.get("parameters");
-	            System.out.print(tasksarr[0]+ " ");
-	            System.out.print(instruction + " ");
-	            System.out.println(tasksarr[1]);
-	            System.out.println(tasks.get("response URL"));
+	           // System.out.print(tasksarr[0]+ " ");
+	           // System.out.print(instruction + " ");
+	           // System.out.println(tasksarr[1]);
+	           // System.out.println(tasks.get("response URL"));
 	        
 	            Maths instructionProcessor = new Maths(tasksarr[0],tasksarr[1]);
 	            
 	            if (instruction.equals("add")) {
-		            int answer = instructionProcessor.add();
-		            System.out.println("Add:" + answer);
+		            String answer = instructionProcessor.add();
+		            //System.out.println("Add:" + answer);
+		            tasks.put("answer", answer);
 	            } else if (instruction.equals("multiply")) {
-		            int answer = instructionProcessor.multiply();
-		            System.out.println("Multiply:" + answer);
+	            	String answer = instructionProcessor.multiply();
+		           // System.out.println("Multiply:" + answer);
+		            tasks.put("answer", answer);
 	            } else  if (instruction.equals("concat")) {
 		            String answer = instructionProcessor.concat();
-		            System.out.println("Concat:" + answer);
+		            //System.out.println("Concat:" + answer);
+		            tasks.put("answer", answer);
 	            } else {
 	            	throw new Exception("Not Vaild Instruction");
 	            }
-	        
-	            
-	            
-	        
-	        
-	        
-	       // in.close();
-			
-	        
 
 	    }
 	        return tasks;
