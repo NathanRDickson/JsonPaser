@@ -10,7 +10,6 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import main.java.uk.ac.uos.i2p.HTTPTasks.Maths;
-import main.java.uk.ac.uos.i2p.HTTPTasks.SendResult;
 
 class MathsTests {
 	public Map<Object, Object> tasks = new HashMap<Object, Object>();
