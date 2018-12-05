@@ -25,8 +25,8 @@ public class ItemParser implements JsonParser {
 		Collection<String> NameItemSplit = jsonItemSplitter(json);
 
 		Iterator<String> itr = NameItemSplit.iterator();
-		String name = itr.next();
-		String item = itr.next();
+		String name = itr.next().trim();
+		String item = itr.next().trim();
 		String FirstChar = item.substring(0, 1);
 		String LastChar = item.substring(item.length() - 1, item.length());
 

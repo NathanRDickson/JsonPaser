@@ -13,7 +13,7 @@ public class ObjectParser {
 	private String json;
 
 	public ObjectParser(String json) {
-		this.json = json;
+		this.json = json.trim();
 	}
 
 	public Map<Object, Object> jsonObject() throws Exception {
@@ -71,7 +71,7 @@ public class ObjectParser {
 
 			if ((',' == c) && arrays < 1 && objects < 1) {
 				subString = object.substring(lastSubString + 1, x);
-				items.add(subString);
+				items.add(subString.trim());
 				lastSubString = x;
 			}
 		}

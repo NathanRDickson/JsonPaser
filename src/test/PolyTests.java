@@ -21,6 +21,25 @@ class PolyTests {
 		assertEquals(55, jsonItems.get("Num"));
 	}
 	@Test
+	void JsonObjectNum55TestSpaces() throws Exception {
+		ObjectParser testData = new ObjectParser("{ \"Num\" : \"55\" }");
+		Map<Object, Object> jsonItems= testData.jsonObject();
+		assertEquals(55, jsonItems.get("Num"));
+	}
+	@Test
+	void JsonObjectNum55TestExtremeSpaces() throws Exception {
+		ObjectParser testData = new ObjectParser("{     \"Num\"    :     \"55\"    }");
+		Map<Object, Object> jsonItems= testData.jsonObject();
+		assertEquals(55, jsonItems.get("Num"));
+	}
+	
+	@Test
+	void JsonObjectNum55TestExtremeSpacesTabsAndBreakLines() throws Exception {
+		ObjectParser testData = new ObjectParser("{   \t  \"Num\"    :   \n  \"55\"    }");
+		Map<Object, Object> jsonItems= testData.jsonObject();
+		assertEquals(55, jsonItems.get("Num"));
+	}
+	@Test
 	void JsonObjectNumBigTest() throws Exception {
 		ObjectParser testData = new ObjectParser("{\"Num\":\"554332456\"}");
 		Map<Object, Object> jsonItems= testData.jsonObject();
@@ -115,6 +134,15 @@ class PolyTests {
 		assertEquals(44, jsonItems.get("NestedNum"));
 	}
 	 
+	 @Test
+	void JsonObjectNestedWithDoubleNestItemTestAndWhiteSpace() throws Exception {
+		ObjectParser testData = new ObjectParser("{   \"Num\":    \"55\",\"GlossEntry\"   :{   \"FirstNest\":\"Fez\",\"GlossEntry\":   {\"SecondNest\"   :   \"65\",\"NestedNum\"   :\"44\"}}}");
+		Map<Object, Object> jsonItems= testData.jsonObject();
+		assertEquals(55, jsonItems.get("Num"));
+		assertEquals("Fez", jsonItems.get("FirstNest"));
+		assertEquals(44, jsonItems.get("NestedNum"));
+	}
+	 
 	
 	 @Test
 	void JsonObjectNestedArrayTest() throws Exception {
@@ -145,6 +173,8 @@ class PolyTests {
 
 	}
 	
+
+	
 	@Test
 	// Note the Problem Where By It Will Only Find the Last Item Called title.
 	void JsonObjectJsonDotOrg() throws Exception {
@@ -153,6 +183,17 @@ class PolyTests {
 		assertEquals("S", jsonItems.get("title"));
 
 	}
+	
+	
+	@Test
+	void JsonObjectJsonFrankServer() throws Exception {
+		ObjectParser testData = new ObjectParser("{\"instruction\":\"add\",\"parameters\":[3979,1990],\"response URL\":\"/answer/3070\"}");
+		Map<Object, Object> jsonItems= testData.jsonObject();
+		assertEquals("add", jsonItems.get("instruction"));
+
+	}
+	
+	
 	
 	@Test
 	void JsonObjectJustNestedTest() throws Exception {
@@ -190,6 +231,8 @@ class PolyTests {
 		assertEquals("Car0", out[0]);
 		assertEquals("Car1", out[1]);
 	}
+	
+	
 	
 	
 	//Old Tests

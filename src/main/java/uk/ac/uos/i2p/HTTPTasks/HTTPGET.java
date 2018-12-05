@@ -18,7 +18,7 @@ public class HTTPGET {
     	     {
     			DoTask task = new DoTask(tasksarr[i]);
     			Map<Object, Object> taskItems = task.jsonTask();
-    			//System.out.println(tasksarr[i]);
+    			System.out.println(tasksarr[i]);
     		}
 
     }
