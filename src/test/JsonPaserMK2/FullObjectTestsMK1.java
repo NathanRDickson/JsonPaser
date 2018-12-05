@@ -1,8 +1,13 @@
 package test.JsonPaserMK2;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
+
+import main.java.uk.ac.uos.i2p.JsonParser.ItemParser;
 import main.java.uk.ac.uos.i2p.JsonParser.ObjectParser;
 
 
@@ -15,6 +20,39 @@ class FullObjectTestsMK1 {
 		ObjectParser testData = new ObjectParser("{\"Num\":\"55\"}");
 		Map<Object, Object> jsonItems= testData.jsonObject();
 		assertEquals(55, jsonItems.get("Num"));
+	}
+	
+	@Test
+	void JsonObjectNum55NoColonTest() throws Exception {
+		ItemParser testData = new ItemParser("{\"Num\"\"55\"}");
+		try {
+			testData.jsonItem();
+			assertFalse("Exception Not Thrown", true);
+		} catch (Exception e) {
+			assertTrue("Exception Thrown", true);
+		}
+	}
+	
+	@Test
+	void JsonObjectDoubleStatingBrace() throws Exception {
+		ItemParser testData = new ItemParser("{{\"Num\":\"55\"}");
+		try {
+			testData.jsonItem();
+			assertFalse("Exception Not Thrown", true);
+		} catch (Exception e) {
+			assertTrue("Exception Thrown", true);
+		}
+	}
+	
+	@Test
+	void JsonObjectDoubleEndingBrace() throws Exception {
+		ItemParser testData = new ItemParser("{\"Num\":\"55\"}}");
+		try {
+			testData.jsonItem();
+			assertFalse("Exception Not Thrown", true);
+		} catch (Exception e) {
+			assertTrue("Exception Thrown", true);
+		}
 	}
 	@Test
 	void JsonObjectNum55TestSpaces() throws Exception {

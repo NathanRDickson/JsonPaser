@@ -20,8 +20,6 @@ public class ItemParser implements JsonParser {
 	@Override
 	public Map<Object, Object> jsonItem() throws Exception {
 
-		//System.out.println("\n" + json + "\n");
-
 		Collection<String> NameItemSplit = jsonItemSplitter(json);
 
 		Iterator<String> itr = NameItemSplit.iterator();
@@ -34,11 +32,9 @@ public class ItemParser implements JsonParser {
 		item = item.substring(1, item.length() - 1);
 
 		if (FirstChar.equals("{") && LastChar.equals("}")) {
-			//System.out.println("\nNest");
 			ObjectParser NestedObject = new ObjectParser("{" + item + "}");
 			Map<Object, Object> nestedJsonItems = NestedObject.jsonObject();
 			jsonItems.putAll(nestedJsonItems);
-			//System.out.println("\n" + name + " " + jsonItems + nestedJsonItems);
 		} else if (item.equals("null")) {
 			jsonItems.put(name, null);
 		} else if (isNumeric(item)) {
@@ -56,10 +52,6 @@ public class ItemParser implements JsonParser {
 			TextString StringOutputOut = new TextString(item);
 			String outputString = StringOutputOut.describe();
 			jsonItems.put(name, outputString);
-		} else if (item.equals("true") || item.equals("false")) {
-			Bool booleanobject = new Bool(item);
-			Boolean output = booleanobject.describebool();
-			jsonItems.put(name, output);
 		} else {
 			throw new Exception("Not Vaild Java Item");
 		}

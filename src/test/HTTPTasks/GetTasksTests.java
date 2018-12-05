@@ -7,8 +7,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-
-import main.java.uk.ac.uos.i2p.HTTPTasks.DoTask;
 import main.java.uk.ac.uos.i2p.HTTPTasks.GetTasks;
 
 class GetTasksTests {
