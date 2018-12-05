@@ -1,4 +1,4 @@
-package test;
+package test.JsonPaserMK2;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 

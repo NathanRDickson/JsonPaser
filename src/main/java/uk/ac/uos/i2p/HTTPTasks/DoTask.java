@@ -10,11 +10,11 @@ import java.util.Map;
 import main.java.uk.ac.uos.i2p.JsonParser.ObjectParser;
 
 public class DoTask {
-	private static String url;
+	private String url;
 	public  Map<Object, Object> tasks = new HashMap<Object, Object>();
 
 	public DoTask(String url) {
-		DoTask.url = url;
+		this.url = url;
 		
 	}
 	

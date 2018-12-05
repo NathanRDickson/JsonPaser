@@ -39,7 +39,6 @@ public class ObjectParser {
 				Map<Object, Object> newitems = nathan.jsonItem();
 
 				for (Map.Entry<Object, Object> m : newitems.entrySet()) {
-					// System.out.println(m.getKey()+" "+m.getValue());
 					jsonItems.put(m.getKey(), m.getValue());
 				}
 
