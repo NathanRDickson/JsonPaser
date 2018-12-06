@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import main.java.uk.ac.uos.i2p.JsonParserMK2.Lexer;
 import main.java.uk.ac.uos.i2p.JsonParserMK2.Symbol;
 
-class PolyTestsForMark2 {
+class ItemTests {
 	
 	//Lexer Tests
 	
