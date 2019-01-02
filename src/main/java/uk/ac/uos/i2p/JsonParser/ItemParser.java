@@ -53,7 +53,7 @@ public class ItemParser implements JsonParser {
 			String outputString = StringOutputOut.describe();
 			jsonItems.put(name, outputString);
 		} else {
-			throw new Exception("Not Vaild Java Item");
+			throw new Exception("Not Valid Java Item");
 		}
 
 		return jsonItems;

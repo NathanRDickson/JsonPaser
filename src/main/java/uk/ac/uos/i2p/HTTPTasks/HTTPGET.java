@@ -1,3 +1,9 @@
+/**
+* Author
+* Version info: v1.1
+* Copyright notice
+*/
+
 package main.java.uk.ac.uos.i2p.HTTPTasks;
 
 import java.util.Map;
@@ -5,7 +11,7 @@ import java.util.Map;
 public class HTTPGET {
 	public static void main(String[] args) throws Exception {
 
-		String student = "s113867";
+		String student = "s195224";
 		String inputurl = "http://i2j.openode.io/student?id=" + student;
 
 		GetTasks Tasks = new GetTasks(inputurl);

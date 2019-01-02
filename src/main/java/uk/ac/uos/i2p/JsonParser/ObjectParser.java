@@ -46,7 +46,7 @@ public class ObjectParser {
 			return jsonItems;
 
 		} else {
-			throw new Exception("Not Vaild Java Object");
+			throw new Exception("Not Valid Java Object");
 		}
 	}
 
