@@ -48,7 +48,7 @@ public class DoTask {
 				String answer = instructionProcessor.concat();
 				tasks.put("answer", answer);
 			} else {
-				throw new Exception("Not Vaild Instruction");
+				throw new Exception("Not Valid Instruction");
 			}
 		}
 		return tasks;
