@@ -1,3 +1,7 @@
+/**
+* Author: Nathan Dickson
+* Version info: v1.1
+*/
 package main.java.uk.ac.uos.i2p.JsonParser;
 
 import java.io.IOException;
@@ -13,6 +17,9 @@ public class ItemParser implements JsonParser {
 	private String json;
 	Map<Object, Object> jsonItems = new HashMap<Object, Object>();
 
+   /** 
+    * Class constructor.
+    */
 	public ItemParser(String json) {
 		this.json = json;
 	}
@@ -20,20 +27,20 @@ public class ItemParser implements JsonParser {
 	@Override
 	public Map<Object, Object> jsonItem() throws Exception {
 
-		Collection<String> NameItemSplit = jsonItemSplitter(json);
+		Collection<String> nameItemSplit = jsonItemSplitter(json);
 
-		Iterator<String> itr = NameItemSplit.iterator();
+		Iterator<String> itr = nameItemSplit.iterator();
 		String name = itr.next().trim();
 		String item = itr.next().trim();
-		String FirstChar = item.substring(0, 1);
-		String LastChar = item.substring(item.length() - 1, item.length());
+		String firstChar = item.substring(0, 1);
+		String lastChar = item.substring(item.length() - 1, item.length());
 
 		name = name.substring(1, name.length() - 1);
 		item = item.substring(1, item.length() - 1);
 
-		if (FirstChar.equals("{") && LastChar.equals("}")) {
-			ObjectParser NestedObject = new ObjectParser("{" + item + "}");
-			Map<Object, Object> nestedJsonItems = NestedObject.jsonObject();
+		if (firstChar.equals("{") && lastChar.equals("}")) {
+			ObjectParser nestedObject = new ObjectParser("{" + item + "}");
+			Map<Object, Object> nestedJsonItems = nestedObject.jsonObject();
 			jsonItems.putAll(nestedJsonItems);
 		} else if (item.equals("null")) {
 			jsonItems.put(name, null);
@@ -44,13 +51,13 @@ public class ItemParser implements JsonParser {
 			Bool booleanobject = new Bool(item);
 			Boolean output = booleanobject.describebool();
 			jsonItems.put(name, output);
-		} else if (FirstChar.equals("[") && LastChar.equals("]")) {
-			JsonStringToArray ArrayDataObject = new JsonStringToArray(item);
-			String[] Arr = ArrayDataObject.jsonStringToArray();
+		} else if (firstChar.equals("[") && lastChar.equals("]")) {
+			JsonStringToArray arrayDataObject = new JsonStringToArray(item);
+			String[] Arr = arrayDataObject.jsonStringToArray();
 			jsonItems.put(name, Arr);
-		} else if ((FirstChar.equals("\"") && LastChar.equals("\"")) == true) {
-			TextString StringOutputOut = new TextString(item);
-			String outputString = StringOutputOut.describe();
+		} else if ((firstChar.equals("\"") && lastChar.equals("\"")) == true) {
+			TextString stringOutputOut = new TextString(item);
+			String outputString = stringOutputOut.describe();
 			jsonItems.put(name, outputString);
 		} else {
 			throw new Exception("Not Valid Java Item");
@@ -77,25 +84,21 @@ public class ItemParser implements JsonParser {
 
 		for (int x = 0; x <= object.length() - 1; x++) {
 			c = reader2.read();
-			// char A = ((char)c);
 			if ('[' == c)arrays++;
 			if (']' == c)arrays--;
 			if ('{' == c)objects++;
 			if ('}' == c)objects--;
-
 			if ((':' == c) && arrays < 1 && objects < 1) {
 				subString = object.substring(lastSubString + 1, x);
-
 				items.add(subString);
 				lastSubString = x;
 			}
-
 		}
 		subString = object.substring(lastSubString + 1, object.length());
 		items.add(subString);
 		
-		Collection<String> NameItemSplit = items;
-		return NameItemSplit;
+		Collection<String> nameItemSplit = items;
+		return nameItemSplit;
 	}
 
 }

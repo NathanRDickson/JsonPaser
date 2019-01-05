@@ -1,3 +1,7 @@
+/**
+* Author: Nathan Dickson
+* Version info: v1.1
+*/
 package main.java.uk.ac.uos.i2p.HTTPTasks;
 
 import java.io.BufferedReader;
@@ -11,6 +15,9 @@ public class SendResult {
 	String posturl;
 	String answer;
 
+	/** 
+	* Class constructor.
+	*/
 	public SendResult(String posturl, String answer) {
 		this.posturl = posturl;
 		this.answer = answer;

@@ -1,3 +1,7 @@
+/**
+* Author: Nathan Dickson
+* Version info: v1.1
+*/
 package main.java.uk.ac.uos.i2p.HTTPTasks;
 
 public class Maths {
@@ -5,6 +9,9 @@ public class Maths {
 	private String val1;
 	private String val2;
 
+	/** 
+	* Class constructor.
+	*/
 	public Maths(String value1, String value2) {
 		this.val1 = value1;
 		this.val2 = value2;

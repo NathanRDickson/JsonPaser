@@ -1,3 +1,7 @@
+/**
+* Author: Nathan Dickson
+* Version info: v1.1
+*/
 package main.java.uk.ac.uos.i2p.HTTPTasks;
 
 import java.io.BufferedReader;
@@ -13,6 +17,9 @@ public class DoTask {
 	private String url;
 	public Map<Object, Object> tasks = new HashMap<Object, Object>();
 
+	/** 
+	* Class constructor.
+	*/
 	public DoTask(String url) {
 		this.url = url;
 

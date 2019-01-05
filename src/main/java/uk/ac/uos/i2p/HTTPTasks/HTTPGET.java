@@ -1,7 +1,6 @@
 /**
-* Author
+* Author: Nathan Dickson
 * Version info: v1.1
-* Copyright notice
 */
 
 package main.java.uk.ac.uos.i2p.HTTPTasks;
@@ -14,9 +13,9 @@ public class HTTPGET {
 		String student = "s195224";
 		String inputurl = "http://i2j.openode.io/student?id=" + student;
 
-		GetTasks Tasks = new GetTasks(inputurl);
+		GetTasks tasks = new GetTasks(inputurl);
 
-		Map<Object, Object> jsonItems = Tasks.jsonTask();
+		Map<Object, Object> jsonItems = tasks.jsonTask();
 
 		System.out.println("Student id: " + jsonItems.get("id"));
 
@@ -29,11 +28,8 @@ public class HTTPGET {
 			String posturl = (String) taskData.get("response URL");
 			String answer = (String) taskData.get("answer");
 
-			SendResult PostRequest = new SendResult(posturl, answer);
-			PostRequest.postResults();
-
+			SendResult postRequest = new SendResult(posturl, answer);
+			postRequest.postResults();
 		}
-
 	}
-
 }

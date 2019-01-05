@@ -1,3 +1,7 @@
+/**
+* Author: Nathan Dickson
+* Version info: v1.1
+*/
 package main.java.uk.ac.uos.i2p.JsonParser;
 
 import java.io.IOException;
@@ -12,6 +16,9 @@ import java.util.Map;
 public class ObjectParser {
 	private String json;
 
+   /** 
+    * Class constructor.
+    */
 	public ObjectParser(String json) {
 		this.json = json.trim();
 	}
@@ -27,21 +34,20 @@ public class ObjectParser {
 
 			String object = json.substring(1, json.length() - 1);
 
-			Collection<String> NameItemSplit = jsonItemSplitter(object);
+			Collection<String> nameItemSplit = jsonItemSplitter(object);
 
 			Map<Object, Object> jsonItems = new HashMap<Object, Object>();
 
-			Iterator<String> itr = NameItemSplit.iterator();
+			Iterator<String> itr = nameItemSplit.iterator();
 			while (itr.hasNext()) {
 				String item = itr.next();
 
-				ItemParser nathan = new ItemParser(item);
-				Map<Object, Object> newitems = nathan.jsonItem();
+				ItemParser itemParserObject = new ItemParser(item);
+				Map<Object, Object> newitems = itemParserObject.jsonItem();
 
 				for (Map.Entry<Object, Object> m : newitems.entrySet()) {
 					jsonItems.put(m.getKey(), m.getValue());
 				}
-
 			}
 			return jsonItems;
 
@@ -61,17 +67,16 @@ public class ObjectParser {
 		int objects = 0;
 		String subString = "";
 
-		for (int x = 0; x <= object.length() - 1; x++) {
+		for (int chunk = 0; chunk <= object.length() - 1; chunk++) {
 			c = reader.read();
 			if ('[' == c)arrays++;
 			if (']' == c)arrays--;
 			if ('{' == c)objects++;
 			if ('}' == c)objects--;
-
 			if ((',' == c) && arrays < 1 && objects < 1) {
-				subString = object.substring(lastSubString + 1, x);
+				subString = object.substring(lastSubString + 1, chunk);
 				items.add(subString.trim());
-				lastSubString = x;
+				lastSubString = chunk;
 			}
 		}
 
