@@ -1,5 +1,5 @@
 /**
-* Author: Nathan Dickson
+* Author: S195224
 * Version info: v1.1
 */
 

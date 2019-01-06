@@ -1,5 +1,5 @@
 /**
-* Author: Nathan Dickson
+* Author: S195224
 * Version info: v1.1
 */
 package main.java.uk.ac.uos.i2p.HTTPTasks;
